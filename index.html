@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pac-Man Clone</title>
+    <link rel="stylesheet" href="src/css/style.css">
+</head>
+<body>
+    <div class="game-container">
+        <h1>PAC-MAN</h1>
+        <div class="info-panel">
+            <div class="score-display">Score: <span id="score">0</span></div>
+            <div class="lives-display">Lives: <span id="lives">3</span></div>
+            <div class="level-display">Level: <span id="level">1</span></div>
+        </div>
+        <canvas id="gameCanvas" width="560" height="720"></canvas>
+        <div class="controls">
+            <p>Use Arrow Keys to move</p>
+            <p>Press SPACE to pause/resume</p>
+        </div>
+        <div id="gameOverScreen" class="game-over">
+            <h2>GAME OVER</h2>
+            <p>Final Score: <span id="finalScore">0</span></p>
+            <button id="restartBtn">Play Again</button>
+        </div>
+    </div>
+    <script src="src/js/utils.js"></script>
+    <script src="src/js/sound.js"></script>
+    <script src="src/js/collision.js"></script>
+    <script src="src/js/map.js"></script>
+    <script src="src/js/player.js"></script>
+    <script src="src/js/ghost.js"></script>
+    <script src="src/js/game.js"></script>
+</body>
+</html>
