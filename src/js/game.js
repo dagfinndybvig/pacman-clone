@@ -74,12 +74,9 @@ function init() {
     if (gameInterval) clearInterval(gameInterval);
     gameInterval = setInterval(gameLoop, 1000 / FPS);
     
-    // Start background siren
+    // Sound system ready
     soundManager.stopSiren();
     soundManager.stopPowerMode();
-    setTimeout(() => {
-        soundManager.startSiren();
-    }, 500);
     
     console.log('Game initialized successfully!');
 }
@@ -175,13 +172,11 @@ function frightenGhosts() {
     ghosts.forEach(ghost => {
         ghost.setFrightened(FRIGHTENED_DURATION);
     });
-    soundManager.stopSiren();
     soundManager.startPowerMode();
     
     // Stop power mode sound when frightened period ends
     setTimeout(() => {
         soundManager.stopPowerMode();
-        if (!isGameOver) soundManager.startSiren();
     }, (FRIGHTENED_DURATION / FPS) * 1000);
 }
 
@@ -204,7 +199,6 @@ function resetPositions() {
 
 function nextLevel() {
     level++;
-    soundManager.stopSiren();
     soundManager.stopPowerMode();
     soundManager.levelComplete();
     
@@ -217,18 +211,12 @@ function nextLevel() {
     });
     
     updateUI();
-    
-    // Restart siren after a delay
-    setTimeout(() => {
-        if (!isGameOver) soundManager.startSiren();
-    }, 1500);
 }
 
 function endGame() {
     isGameOver = true;
     clearInterval(gameInterval);
     
-    soundManager.stopSiren();
     soundManager.stopPowerMode();
     soundManager.gameOver();
     
