@@ -59,6 +59,9 @@ canvas {
     border-radius: 10px;
     box-shadow: 0 0 20px rgba(33, 150, 243, 0.5),
                 0 0 40px rgba(33, 150, 243, 0.3);
+    max-width: 100%;
+    height: auto;
+    touch-action: none;
 }
 
 .controls {
@@ -120,4 +123,57 @@ canvas {
 #restartBtn:hover {
     background-color: #1976D2;
     transform: scale(1.1);
+}
+
+/* Mobile responsive styles */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+    
+    h1 {
+        font-size: 24px;
+        margin-bottom: 10px;
+        letter-spacing: 2px;
+    }
+    
+    .info-panel {
+        font-size: 12px;
+        padding: 10px;
+        flex-wrap: wrap;
+    }
+    
+    .score-display,
+    .lives-display,
+    .level-display {
+        font-size: 14px;
+        margin: 5px;
+    }
+    
+    canvas {
+        border-width: 3px;
+    }
+    
+    .controls {
+        font-size: 10px;
+    }
+    
+    .game-over {
+        padding: 20px;
+        width: 90%;
+        max-width: 400px;
+    }
+    
+    .game-over h2 {
+        font-size: 24px;
+    }
+    
+    .game-over p {
+        font-size: 16px;
+    }
+    
+    #restartBtn {
+        padding: 12px 24px;
+        font-size: 14px;
+    }
 }

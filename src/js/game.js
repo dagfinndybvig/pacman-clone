@@ -278,5 +278,63 @@ restartBtn.addEventListener('click', () => {
     init();
 });
 
+// Touch/Swipe controls for mobile
+let touchStartX = 0;
+let touchStartY = 0;
+let touchEndX = 0;
+let touchEndY = 0;
+
+const minSwipeDistance = 30;
+
+canvas.addEventListener('touchstart', (e) => {
+    // Initialize sound on first interaction
+    soundManager.enable();
+    
+    touchStartX = e.changedTouches[0].screenX;
+    touchStartY = e.changedTouches[0].screenY;
+    e.preventDefault();
+}, { passive: false });
+
+canvas.addEventListener('touchend', (e) => {
+    if (isGameOver) return;
+    
+    touchEndX = e.changedTouches[0].screenX;
+    touchEndY = e.changedTouches[0].screenY;
+    
+    handleSwipe();
+    e.preventDefault();
+}, { passive: false });
+
+function handleSwipe() {
+    const deltaX = touchEndX - touchStartX;
+    const deltaY = touchEndY - touchStartY;
+    
+    const absDeltaX = Math.abs(deltaX);
+    const absDeltaY = Math.abs(deltaY);
+    
+    // Check if it's a tap (small movement) - use for pause
+    if (absDeltaX < minSwipeDistance && absDeltaY < minSwipeDistance) {
+        togglePause();
+        return;
+    }
+    
+    // Determine swipe direction
+    if (absDeltaX > absDeltaY) {
+        // Horizontal swipe
+        if (deltaX > 0) {
+            player.setDirection({ x: 1, y: 0 }); // Right
+        } else {
+            player.setDirection({ x: -1, y: 0 }); // Left
+        }
+    } else {
+        // Vertical swipe
+        if (deltaY > 0) {
+            player.setDirection({ x: 0, y: 1 }); // Down
+        } else {
+            player.setDirection({ x: 0, y: -1 }); // Up
+        }
+    }
+}
+
 // Start the game
 init();
