@@ -20,6 +20,8 @@ A classic Pacman arcade game built with vanilla HTML5, CSS3, and JavaScript. Fea
 
 ## 🚀 Quick Start
 
+Try it on https://dagfinndybvig.github.io/pacman-clone/ or:
+
 1. Clone the repository:
 ```bash
 git clone https://github.com/yourusername/pacman-clone.git
