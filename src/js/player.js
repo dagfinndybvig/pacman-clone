@@ -103,6 +103,16 @@ class Player {
             this.x = this.gridX * this.tileSize + this.tileSize / 2;
             this.targetX = this.x;
         }
+        if (this.gridY < 0) {
+            this.gridY = map.layout.length - 1;
+            this.y = this.gridY * this.tileSize + this.tileSize / 2;
+            this.targetY = this.y;
+        }
+        if (this.gridY >= map.layout.length) {
+            this.gridY = 0;
+            this.y = this.gridY * this.tileSize + this.tileSize / 2;
+            this.targetY = this.y;
+        }
     }
 
     draw(ctx) {

@@ -2,7 +2,7 @@
 console.log('map.js loaded');
 
 const mapLayout = [
-    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
     [1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1],
     [1, 2, 1, 1, 2, 1, 1, 1, 1, 2, 1, 1, 2, 1],
     [1, 3, 1, 1, 2, 1, 1, 1, 1, 2, 1, 1, 3, 1],
@@ -10,7 +10,7 @@ const mapLayout = [
     [1, 2, 1, 1, 2, 1, 2, 1, 2, 1, 1, 1, 2, 1],
     [1, 2, 2, 2, 2, 1, 2, 1, 2, 2, 2, 2, 2, 1],
     [1, 1, 1, 1, 2, 1, 0, 0, 2, 1, 1, 1, 1, 1],
-    [0, 0, 0, 1, 2, 1, 0, 0, 2, 1, 0, 0, 0, 0],
+    [2, 2, 2, 1, 2, 1, 0, 0, 2, 1, 2, 2, 2, 2],
     [1, 1, 1, 1, 2, 1, 1, 1, 2, 1, 1, 1, 1, 1],
     [1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1],
     [1, 2, 1, 1, 2, 1, 1, 1, 1, 2, 1, 1, 2, 1],
@@ -18,8 +18,8 @@ const mapLayout = [
     [1, 1, 2, 1, 2, 1, 2, 1, 2, 1, 1, 2, 1, 1],
     [1, 2, 2, 2, 2, 1, 2, 1, 2, 2, 2, 2, 2, 1],
     [1, 2, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 2, 1],
-    [1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1],
-    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+    [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
+    [1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 ];
 
 const TILE_SIZE = 40;
@@ -47,24 +47,29 @@ class GameMap {
     }
 
     getTile(x, y) {
-        const gridX = Math.floor(x / this.tileSize);
-        const gridY = Math.floor(y / this.tileSize);
+        let gridX = Math.floor(x / this.tileSize);
+        let gridY = Math.floor(y / this.tileSize);
         
-        if (gridY >= 0 && gridY < this.layout.length && 
-            gridX >= 0 && gridX < this.layout[0].length) {
-            return this.layout[gridY][gridX];
-        }
-        return 1; // Return wall if out of bounds
+        // Wrap around coordinates
+        const width = this.layout[0].length;
+        const height = this.layout.length;
+        gridX = ((gridX % width) + width) % width;
+        gridY = ((gridY % height) + height) % height;
+        
+        return this.layout[gridY][gridX];
     }
 
     setTile(x, y, value) {
-        const gridX = Math.floor(x / this.tileSize);
-        const gridY = Math.floor(y / this.tileSize);
+        let gridX = Math.floor(x / this.tileSize);
+        let gridY = Math.floor(y / this.tileSize);
         
-        if (gridY >= 0 && gridY < this.layout.length && 
-            gridX >= 0 && gridX < this.layout[0].length) {
-            this.layout[gridY][gridX] = value;
-        }
+        // Wrap around coordinates
+        const width = this.layout[0].length;
+        const height = this.layout.length;
+        gridX = ((gridX % width) + width) % width;
+        gridY = ((gridY % height) + height) % height;
+        
+        this.layout[gridY][gridX] = value;
     }
 
     isWall(x, y) {
