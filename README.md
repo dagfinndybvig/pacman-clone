@@ -1,3 +1,6 @@
+
+![pacman](https://github.com/user-attachments/assets/02f2a42a-edc8-456d-ad4d-c78f45431db2)
+
 # Pacman Clone 🎮
 
 A classic Pacman arcade game built with vanilla HTML5, CSS3, and JavaScript. Features grid-based movement, ghost AI, arcade sound effects, and authentic gameplay mechanics.
